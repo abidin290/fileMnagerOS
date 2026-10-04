@@ -1,11 +1,31 @@
 <resources>
-    <color name="brand">#64D3B4</color>
-    <color name="brand_dark">#36B795</color>
-    <color name="surface">#202224</color>
-    <color name="canvas">#17191B</color>
-    <color name="ink">#F0F1F2</color>
-    <color name="muted">#A6ABB2</color>
-    <color name="line">#363A3E</color>
-    <color name="accent_soft">#203D34</color>
-    <color name="favorite">#E9BE59</color>
+    <color name="brand">#10B981</color>
+    <color name="brand_dark">#059669</color>
+    <color name="brand_light">#064E3B</color>
+    <color name="surface">#1E293B</color>
+    <color name="canvas">#0F172A</color>
+    <color name="ink">#F8FAFC</color>
+    <color name="ink_secondary">#CBD5E1</color>
+    <color name="muted">#94A3B8</color>
+    <color name="muted_light">#64748B</color>
+    <color name="line">#334155</color>
+    <color name="accent_soft">#064E3B</color>
+    <color name="favorite">#FBBF24</color>
+
+    <color name="file_folder">#60A5FA</color>
+    <color name="file_folder_bg">#1E3A8A</color>
+    <color name="file_pdf">#F87171</color>
+    <color name="file_pdf_bg">#450A0A</color>
+    <color name="file_image">#34D399</color>
+    <color name="file_image_bg">#064E3B</color>
+    <color name="file_doc">#818CF8</color>
+    <color name="file_doc_bg">#1E1B4B</color>
+    <color name="file_video">#A78BFA</color>
+    <color name="file_video_bg">#2E1065</color>
+    <color name="file_audio">#FB923C</color>
+    <color name="file_audio_bg">#431407</color>
+    <color name="file_archive">#FBBF24</color>
+    <color name="file_archive_bg">#451A03</color>
+    <color name="file_generic">#94A3B8</color>
+    <color name="file_generic_bg">#1E293B</color>
 </resources>

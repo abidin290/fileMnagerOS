@@ -1,4 +1,4 @@
-﻿*.iml
+*.iml
 .gradle/
 local.properties
 /.idea/
@@ -7,3 +7,4 @@ local.properties
 /app/build/
 /backend/node_modules/
 /backend/dist/
+.vscode/

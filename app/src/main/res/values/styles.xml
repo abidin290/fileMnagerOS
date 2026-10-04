@@ -11,23 +11,27 @@
         <item name="android:letterSpacing">0</item>
         <item name="android:windowLightStatusBar">@bool/light_system_bars</item>
         <item name="android:statusBarColor">@color/surface</item>
-        <item name="android:navigationBarColor">#20252B</item>
+        <item name="android:navigationBarColor">@color/canvas</item>
         <item name="android:windowActionModeOverlay">true</item>
     </style>
     <style name="Theme.FastCloudStorage" parent="Base.FastCloudStorage" />
+
     <style name="ToolButton">
-        <item name="android:layout_width">48dp</item>
-        <item name="android:layout_height">48dp</item>
-        <item name="android:padding">13dp</item>
+        <item name="android:layout_width">40dp</item>
+        <item name="android:layout_height">40dp</item>
+        <item name="android:padding">8dp</item>
         <item name="android:background">?attr/selectableItemBackgroundBorderless</item>
         <item name="android:tint">@color/muted</item>
     </style>
+
     <style name="FilterChip" parent="Widget.MaterialComponents.Chip.Filter">
-        <item name="chipCornerRadius">8dp</item>
-        <item name="chipStrokeWidth">0dp</item>
+        <item name="chipCornerRadius">10dp</item>
+        <item name="chipStrokeWidth">1dp</item>
+        <item name="chipStrokeColor">@color/line</item>
         <item name="chipBackgroundColor">@color/chip_background</item>
         <item name="android:textColor">@color/ink</item>
         <item name="android:textSize">12sp</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
         <item name="checkedIconVisible">false</item>
     </style>
 </resources>
