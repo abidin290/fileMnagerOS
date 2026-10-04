@@ -96,6 +96,7 @@ class MainActivity : AppCompatActivity() {
         binding.swipeRefresh.setOnRefreshListener { fetchFiles() }
         binding.swipeRefresh.setColorSchemeResources(R.color.brand)
         binding.fabUpload.setOnClickListener { pickFilesLauncher.launch("*/*") }
+        binding.fabNewFolder.setOnClickListener { showCreateFolderDialog() }
         binding.btnSort.setOnClickListener { showSortMenu() }
         binding.btnFolder.setOnClickListener { showFolderMenu() }
         binding.btnRefresh.setOnClickListener { fetchFiles() }
@@ -205,7 +206,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     private suspend fun uploadOne(uri: Uri, current: Int, totalFiles: Int) {
-        val fileName = getFileName(uri) ?: "upload-${System.currentTimeMillis()}"
+        val baseFileName = getFileName(uri) ?: "upload-${System.currentTimeMillis()}"
+        val folderPrefix = if (folderMode == "Semua folder" || folderMode == "Root") "" else "$folderMode/"
+        val fileName = folderPrefix + baseFileName
         val contentType = contentResolver.getType(uri) ?: "application/octet-stream"
         val size = getFileSize(uri)
         runOnUiThread {
@@ -597,6 +600,49 @@ class MainActivity : AppCompatActivity() {
 
     private fun showToast(message: String) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+    }
+
+    private fun showCreateFolderDialog() {
+        val input = EditText(this).apply {
+            hint = "Nama Folder"
+            setSingleLine(true)
+        }
+        AlertDialog.Builder(this)
+            .setTitle("Buat Folder Baru")
+            .setView(input)
+            .setNegativeButton("Batal", null)
+            .setPositiveButton("Buat") { _, _ ->
+                val newName = input.text.toString().trim()
+                if (newName.isNotBlank()) createFolder(newName)
+            }
+            .show()
+    }
+
+    private fun createFolder(folderName: String) {
+        val folderPrefix = if (folderMode == "Semua folder" || folderMode == "Root") "" else "$folderMode/"
+        val dummyFile = "$folderPrefix$folderName/.keep"
+        lifecycleScope.launch(Dispatchers.IO) {
+            val result = runCatching {
+                val dummyContent = " ".toByteArray()
+                val uploadUrlResponse = ApiClient.instance.createUploadUrl(UploadUrlRequest(dummyFile, "text/plain", dummyContent.size.toLong()))
+                val uploadData = uploadUrlResponse.body()?.data
+                check(uploadUrlResponse.isSuccessful && uploadData != null) { "Gagal meminta URL" }
+
+                val builder = Request.Builder().url(uploadData.uploadUrl).put(okhttp3.RequestBody.create(null, dummyContent))
+                uploadData.headers.forEach { (name, value) -> builder.header(name, value) }
+                ApiClient.rawHttpClient.newCall(builder.build()).execute().use {
+                    check(it.isSuccessful) { "Gagal membuat folder" }
+                }
+            }
+            withContext(Dispatchers.Main) {
+                if (result.isSuccess) {
+                    showToast("Folder '$folderName' dibuat")
+                    fetchFiles()
+                } else {
+                    showToast("Gagal membuat folder: ${result.exceptionOrNull()?.localizedMessage}")
+                }
+            }
+        }
     }
 
     private enum class FilterMode(val label: String) {
