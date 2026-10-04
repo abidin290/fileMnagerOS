@@ -1,0 +1,49 @@
+# This file describes a Fastly Compute package. To learn more visit:
+# https://www.fastly.com/documentation/reference/compute/fastly-toml
+
+authors = []
+description = "FastCloud Storage Lite edge backend"
+language = "javascript"
+manifest_version = 3
+name = "fastcloud-storage-lite-backend"
+service_id = "K7JycXeTdGpG9rVhI9mjYy"
+
+[local_server]
+
+  [local_server.backends]
+
+    [local_server.backends.s3_origin]
+      url = "https://s3.amazonaws.com"
+
+[setup.backends.s3_origin]
+  address = "s3.natanet.my.id"
+  port = 443
+  use_ssl = true
+  override_host = "s3.natanet.my.id"
+  ssl_cert_hostname = "s3.natanet.my.id"
+  ssl_sni_hostname = "s3.natanet.my.id"
+  connect_timeout = 5000
+  first_byte_timeout = 30000
+  between_bytes_timeout = 30000
+
+[scripts]
+  build = "npm run build"
+
+[setup.config_stores.fastcloud_config]
+  description = "FastCloud Storage Lite non-secret S3-compatible storage configuration"
+
+  [setup.config_stores.fastcloud_config.items.S3_BUCKET]
+    description = "Object storage bucket name"
+
+  [setup.config_stores.fastcloud_config.items.S3_REGION]
+    value = "us-east-1"
+    description = "S3-compatible storage signing region"
+
+  [setup.config_stores.fastcloud_config.items.S3_ENDPOINT]
+    description = "S3-compatible endpoint, for example https://s3.amazonaws.com or Cloudflare R2 endpoint"
+
+  [setup.config_stores.fastcloud_config.items.S3_PUBLIC_BASE_URL]
+    description = "Optional public base URL for image preview and direct download links"
+
+[setup.secret_stores.fastcloud_secrets]
+  description = "FastCloud Storage Lite S3-compatible storage credentials"

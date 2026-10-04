@@ -1,0 +1,38 @@
+name: Android CI
+
+on:
+  push:
+    branches: [ "main", "master" ]
+  pull_request:
+    branches: [ "main", "master" ]
+  workflow_dispatch: # Memungkinkan Anda untuk men-trigger build secara manual lewat GitHub UI
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v4
+
+    - name: Setup JDK 17
+      uses: actions/setup-java@v4
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+        cache: gradle
+
+    - name: Setup Gradle
+      uses: gradle/actions/setup-gradle@v4
+      with:
+        # Menentukan versi Gradle secara eksplisit karena file gradlew lokal Anda terhapus
+        gradle-version: '8.13'
+
+    - name: Build APK dengan Gradle
+      run: gradle assembleDebug
+
+    - name: Upload APK Hasil Build
+      uses: actions/upload-artifact@v4
+      with:
+        name: aplikasi-android-debug
+        path: app/build/outputs/apk/debug/app-debug.apk

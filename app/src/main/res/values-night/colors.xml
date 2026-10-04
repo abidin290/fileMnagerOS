@@ -1,0 +1,11 @@
+<resources>
+    <color name="brand">#64D3B4</color>
+    <color name="brand_dark">#36B795</color>
+    <color name="surface">#202224</color>
+    <color name="canvas">#17191B</color>
+    <color name="ink">#F0F1F2</color>
+    <color name="muted">#A6ABB2</color>
+    <color name="line">#363A3E</color>
+    <color name="accent_soft">#203D34</color>
+    <color name="favorite">#E9BE59</color>
+</resources>

@@ -1,0 +1,9 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" android:layout_width="match_parent" android:layout_height="wrap_content" android:minHeight="80dp" android:paddingVertical="12dp" android:paddingStart="4dp" android:orientation="horizontal" android:gravity="center_vertical" android:background="?attr/selectableItemBackground">
+    <ImageView android:id="@+id/ivPreview" android:layout_width="52dp" android:layout_height="52dp" android:background="@drawable/bg_search" android:clipToOutline="true" android:importantForAccessibility="no"/>
+    <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:layout_marginStart="12dp" android:orientation="vertical">
+        <TextView android:id="@+id/tvFileName" android:layout_width="match_parent" android:layout_height="wrap_content" android:maxLines="1" android:ellipsize="middle" android:textColor="@color/ink" android:textSize="14sp" android:fontFamily="sans-serif-medium"/>
+        <TextView android:id="@+id/tvMeta" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="5dp" android:maxLines="1" android:ellipsize="end" android:textColor="@color/muted" android:textSize="11sp"/>
+    </LinearLayout>
+    <ImageButton android:id="@+id/btnFavorite" style="@style/ToolButton" android:src="@android:drawable/btn_star_big_off" android:contentDescription="Tambah favorit"/>
+    <ImageButton android:id="@+id/btnMore" style="@style/ToolButton" android:src="@android:drawable/ic_menu_more" android:contentDescription="Opsi file"/>
+</LinearLayout>
