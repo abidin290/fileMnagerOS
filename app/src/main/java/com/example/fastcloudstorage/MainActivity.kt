@@ -241,8 +241,6 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    }
-
     private fun applyListState() {
         val filtered = allFiles
             .asSequence()
